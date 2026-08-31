@@ -1,0 +1,14 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>body{margin:0;background:#222}#c{display:block}</style></head>
+<body>
+<video id="v" src="assets/source.mp4" muted playsinline crossorigin="anonymous"></video>
+<canvas id="c" width="640" height="360"></canvas>
+<script>
+const v=document.getElementById('v'), c=document.getElementById('c'), x=c.getContext('2d');
+window.__info={};
+v.addEventListener('loadedmetadata',()=>{ window.__info.w=v.videoWidth; window.__info.h=v.videoHeight; window.__info.dur=v.duration; c.width=v.videoWidth; c.height=v.videoHeight; });
+async function grab(t){ return new Promise(r=>{ v.currentTime=t; v.addEventListener('seeked',()=>{ x.drawImage(v,0,0,c.width,c.height); r(); },{once:true}); }); }
+window.__grab=grab;
+// luma histogram summary
+window.__stats=function(){ const d=x.getImageData(0,0,c.width,c.height).data; const hist=new Array(256).fill(0); let n=0; for(let i=0;i<d.length;i+=4){const l=(0.2126*d[i]+0.7152*d[i+1]+0.0722*d[i+2])|0;hist[l]++;n++;} let acc=0,lo=0,hi=255; for(let k=0;k<256;k++){acc+=hist[k];if(acc>=n*0.02){lo=k;break;}} acc=0; for(let k=0;k<256;k++){acc+=hist[k];if(acc>=n*0.5){window.__info.median=k;break;}} let mean=0; for(let k=0;k<256;k++)mean+=k*hist[k]; mean/=n; return {mean:Math.round(mean),median:window.__info.median}; };
+</script>
+</body></html>

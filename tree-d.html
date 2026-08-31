@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Field Study — Nocturne</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,500;1,6..72,300&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --ground:#090807; --ink:#f0ebe3; --muted:#b8a88f; --accent:#e6b877; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html,body { height:100%; }
+  body { background:var(--ground); color:var(--ink); overflow:hidden;
+         font-family:"Inter",system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+  #scene { position:fixed; inset:0; width:100%; height:100%; z-index:0; }
+  #src { position:fixed; width:2px; height:2px; opacity:0; left:-10px; top:-10px; pointer-events:none; }
+  /* type sits on the right; darken the right, let the bright field breathe on the left */
+  .scrim { position:fixed; inset:0; z-index:1; pointer-events:none;
+    background:
+      linear-gradient(255deg, rgba(9,8,7,.92) 0%, rgba(9,8,7,.66) 26%, rgba(9,8,7,.12) 54%, rgba(9,8,7,0) 74%),
+      linear-gradient(to top, rgba(9,8,7,.6) 0%, rgba(9,8,7,0) 42%); }
+  .stage { position:fixed; inset:0; z-index:2; display:flex; flex-direction:column; justify-content:space-between;
+           align-items:flex-end; text-align:right; padding:clamp(22px,4vw,56px); }
+  .top { width:100%; display:flex; align-items:center; justify-content:space-between; }
+  .brand { font-family:"Newsreader",serif; font-size:20px; font-weight:500; letter-spacing:.02em; }
+  .coord { font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); }
+  .hero { max-width:min(640px,86vw); }
+  .eyebrow { color:var(--accent); font-size:12px; letter-spacing:.26em; text-transform:uppercase; margin-bottom:20px; }
+  h1 { font-family:"Newsreader",serif; font-weight:300; font-size:clamp(40px,7vw,88px); line-height:1.02;
+       letter-spacing:-.01em; text-shadow:0 2px 40px rgba(0,0,0,.5); }
+  h1 em { font-style:italic; color:var(--accent); }
+  .sub { margin-top:22px; margin-left:auto; max-width:44ch; color:var(--muted);
+         font-size:clamp(15px,1.5vw,18px); line-height:1.6; }
+  .cta { display:inline-flex; align-items:center; gap:11px; margin-top:32px; padding:13px 26px; border-radius:6px;
+         border:1px solid rgba(230,184,119,.5); color:var(--ink); font-size:15px; text-decoration:none;
+         transition:background .2s,border-color .2s; }
+  .cta:hover { background:rgba(230,184,119,.14); border-color:var(--accent); }
+  .styles { position:fixed; left:clamp(22px,4vw,56px); bottom:clamp(22px,4vw,56px); z-index:3;
+            font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); text-decoration:none; }
+  .styles:hover { color:var(--ink); }
+  @media (max-width:640px){ .sub{ display:none; } .coord{ display:none; } }
+</style>
+</head>
+<body>
+  <canvas id="scene"></canvas>
+  <video id="src" src="assets/tree.mp4" muted loop playsinline preload="auto" crossorigin="anonymous"></video>
+  <div class="scrim"></div>
+  <div class="stage">
+    <header class="top"><span class="coord">51° 30′ N — 0° 07′ W · 17:42</span><span class="brand">Nocturne</span></header>
+    <section class="hero">
+      <div class="eyebrow">Deep field imaging</div>
+      <h1>The colours<br>of the turning<br><em>year.</em></h1>
+      <p class="sub">A quiet, continuous study of one tree letting go — rendered dot by dot from
+      live capture, in the colours it actually wears as the light leaves the field.</p>
+      <a class="cta" href="#">See the field study →</a>
+    </section>
+    <span></span>
+  </div>
+  <a class="styles" href="tree-index.html">◂ Styles</a>
+  <script>
+    window.__dither = {
+      colorMode:'sampled', ground:[9,8,7],
+      shape:'circle', warp:'twist', pointerTwist:0.8, pointerRadiusFrac:0.55,
+      pixelSize:7, dotScale:0.86, spacing:0.4, levels:6,
+      invert:false,
+      contrast:26, brightness:4, floor:0.05, gamma:0.9,
+      zoom:1.1, offsetX:0.4, offsetY:0.5,
+      loopCrossfade:1.5,
+    };
+  </script>
+  <script src="dither.js"></script>
+</body>
+</html>

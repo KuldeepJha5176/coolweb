@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dither Studies — Three Worlds</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500&family=Fraunces:opsz,ital,wght@9..144,1,400;9..144,0,600&family=Anton&family=Newsreader:ital,wght@1,300;0,300;0,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #060608;
+    --surface: #0e0e14;
+    --border: rgba(255,255,255,.08);
+    --ink: #e9eaf2;
+    --muted: #7c7d97;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--bg); color:var(--ink); font-family:"Inter",system-ui,sans-serif;
+         -webkit-font-smoothing:antialiased; }
+
+  /* ── top nav ── */
+  nav { position:sticky; top:0; z-index:10; background:rgba(6,6,8,.85); backdrop-filter:blur(12px);
+        border-bottom:1px solid var(--border); display:flex; align-items:center;
+        justify-content:space-between; padding:14px clamp(20px,5vw,72px); }
+  .nav-logo { font-family:"Space Grotesk",sans-serif; font-weight:700; font-size:15px;
+              letter-spacing:.1em; text-transform:uppercase; }
+  .nav-links { display:flex; gap:26px; font-size:13px; color:var(--muted); }
+  .nav-links a { color:inherit; text-decoration:none; transition:color .18s; }
+  .nav-links a:hover { color:var(--ink); }
+  @media(max-width:560px){ .nav-links{ display:none; } }
+
+  /* ── hero ── */
+  .hero { padding:clamp(60px,10vw,120px) clamp(20px,5vw,72px) clamp(40px,6vw,72px); max-width:860px; }
+  .hero-label { font-size:12px; letter-spacing:.28em; text-transform:uppercase; color:var(--muted); margin-bottom:20px; }
+  .hero h1 { font-family:"Space Grotesk",sans-serif; font-size:clamp(36px,6.5vw,76px);
+             font-weight:700; letter-spacing:-.02em; line-height:1.0; }
+  .hero h1 span { color:#8f7bff; }
+  .hero p { margin-top:20px; max-width:58ch; color:var(--muted); line-height:1.65; font-size:clamp(15px,1.6vw,17px); }
+
+  /* ── project block ── */
+  .project { padding:clamp(40px,6vw,72px) clamp(20px,5vw,72px); border-top:1px solid var(--border); }
+  .project-header { display:flex; align-items:flex-start; justify-content:space-between;
+                    gap:24px; flex-wrap:wrap; margin-bottom:32px; }
+  .project-meta { }
+  .project-num { font-size:11px; letter-spacing:.28em; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
+  .project-name { font-size:clamp(26px,4vw,44px); font-weight:700;
+                  font-family:"Space Grotesk",sans-serif; letter-spacing:-.02em; }
+  .project-name.serif { font-family:"Newsreader",serif; font-weight:300; font-style:italic; }
+  .project-name.poster { font-family:"Anton",sans-serif; font-weight:400; text-transform:uppercase; }
+  .project-desc { max-width:52ch; color:var(--muted); line-height:1.6; font-size:15px; margin-top:10px; }
+  .project-cta { flex:none; align-self:flex-end; display:inline-flex; align-items:center; gap:10px;
+                 padding:11px 22px; border:1px solid var(--border); border-radius:999px; font-size:13px;
+                 color:var(--ink); text-decoration:none; transition:border-color .2s,background .2s; white-space:nowrap; }
+  .project-cta:hover { border-color:rgba(255,255,255,.3); background:rgba(255,255,255,.05); }
+
+  /* ── variant grid ── */
+  .variants { display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); }
+  .vcard { display:flex; flex-direction:column; border:1px solid var(--border); border-radius:12px;
+           overflow:hidden; text-decoration:none; color:inherit; background:var(--surface);
+           transition:transform .18s, border-color .18s, box-shadow .18s; }
+  .vcard:hover { transform:translateY(-3px); border-color:rgba(255,255,255,.2);
+                 box-shadow:0 16px 40px rgba(0,0,0,.45); }
+  .vcard-swatch { height:120px; position:relative; overflow:hidden;
+                  display:flex; align-items:center; justify-content:center; }
+  .vcard-dots { position:absolute; inset:0; }
+  .vcard-badge { position:relative; font-size:26px; }
+  .vcard-body { padding:14px 16px 18px; }
+  .vcard-name { font-weight:600; font-size:15px; margin-bottom:3px; }
+  .vcard-sub { font-size:12px; color:var(--muted); line-height:1.45; }
+  .vcard-go { margin-top:10px; font-size:12px; font-weight:600; }
+
+  /* ── Aphelion palette ── */
+  .p-aphelion { --accent-rgb:143,123,255; --accent:#8f7bff; }
+  .p-aphelion .project-name { color:#c4b8ff; }
+  .p-aphelion .vcard-go { color:#8f7bff; }
+  .p-aphelion .sa { background:radial-gradient(120% 120% at 62% 45%, #1b1440, #08070f); }
+  .p-aphelion .sa .vcard-dots { background-image:radial-gradient(#8f7bff 34%,transparent 36%); background-size:13px 13px; opacity:.85; }
+  .p-aphelion .sb { background:#efe9dc; }
+  .p-aphelion .sb .vcard-dots { background-image:radial-gradient(#2a2140 30%,transparent 32%); background-size:16px 16px; opacity:.75; }
+  .p-aphelion .sb .vcard-badge { font-family:"Fraunces",serif; color:#2a2140; font-style:italic; font-size:22px; }
+  .p-aphelion .sb .vcard-name,.p-aphelion .sb .vcard-sub,.p-aphelion .sb .vcard-go { color:#2a2140 !important; filter:none; }
+  .p-aphelion .sc { background:#08070d; }
+  .p-aphelion .sc .vcard-dots { background-color:#ff3ea5;
+    -webkit-mask-image:radial-gradient(#000 46%,transparent 48%); mask-image:radial-gradient(#000 46%,transparent 48%);
+    -webkit-mask-size:11px 11px; mask-size:11px 11px; }
+  .p-aphelion .sc .vcard-badge { font-family:"Anton",sans-serif; color:#ff3ea5; text-transform:uppercase; font-size:22px; }
+  .p-aphelion .sd { background:radial-gradient(120% 120% at 40% 50%, #2a1c52, #080711); }
+  .p-aphelion .sd .vcard-dots { background-image:radial-gradient(#b79cff 30%,transparent 33%),radial-gradient(#5a7bff 30%,transparent 33%);
+    background-size:9px 9px,9px 9px; background-position:0 0,4px 4px; opacity:.8; }
+  .p-aphelion .sd .vcard-badge { font-family:"Newsreader",serif; font-style:italic; color:#efeaff; font-size:22px; }
+
+  /* ── Nocturne palette ── */
+  .p-nocturne { --accent:#d4874a; }
+  .p-nocturne .project-name { color:#e8a96a; }
+  .p-nocturne .vcard-go { color:#d4874a; }
+  .p-nocturne .na { background:radial-gradient(120% 120% at 55% 50%, #1c0e04, #070402); }
+  .p-nocturne .na .vcard-dots { background-image:radial-gradient(#d4874a 34%,transparent 36%); background-size:13px 13px; opacity:.85; }
+  .p-nocturne .nb { background:#f0e6d3; }
+  .p-nocturne .nb .vcard-dots { background-image:radial-gradient(#3b2210 30%,transparent 32%); background-size:16px 16px; opacity:.8; }
+  .p-nocturne .nb .vcard-badge { font-family:"Fraunces",serif; color:#3b2210; font-style:italic; font-size:20px; }
+  .p-nocturne .nb .vcard-name,.p-nocturne .nb .vcard-sub,.p-nocturne .nb .vcard-go { color:#3b2210 !important; }
+  .p-nocturne .nc { background:#060402; }
+  .p-nocturne .nc .vcard-dots { background-color:#ff6b2b;
+    -webkit-mask-image:radial-gradient(#000 46%,transparent 48%); mask-image:radial-gradient(#000 46%,transparent 48%);
+    -webkit-mask-size:11px 11px; mask-size:11px 11px; }
+  .p-nocturne .nc .vcard-badge { font-family:"Anton",sans-serif; color:#ff6b2b; text-transform:uppercase; font-size:20px; }
+  .p-nocturne .nd { background:radial-gradient(120% 120% at 40% 50%, #1c0c04, #060403); }
+  .p-nocturne .nd .vcard-dots { background-image:radial-gradient(#e8a96a 30%,transparent 33%),radial-gradient(#7cc87a 30%,transparent 33%);
+    background-size:9px 9px,9px 9px; background-position:0 0,4px 4px; opacity:.8; }
+  .p-nocturne .nd .vcard-badge { font-family:"Newsreader",serif; font-style:italic; color:#f0e6d3; font-size:20px; }
+
+  /* ── Meridian palette ── */
+  .p-meridian { --accent:#68c2ff; }
+  .p-meridian .project-name { color:#68c2ff; }
+  .p-meridian .vcard-go { color:#68c2ff; }
+  .p-meridian .ma { background:radial-gradient(120% 120% at 70% 40%, #0f2033, #050810); }
+  .p-meridian .ma .vcard-dots { background-image:radial-gradient(#68c2ff 34%,transparent 36%); background-size:13px 13px; }
+  .p-meridian .mb { background:#f2ead9; }
+  .p-meridian .mb .vcard-dots { background-image:radial-gradient(#2b2622 30%,transparent 32%); background-size:15px 15px; opacity:.85; }
+  .p-meridian .mb .vcard-badge { font-family:"Fraunces",serif; color:#2b2622; font-style:italic; font-size:20px; }
+  .p-meridian .mb .vcard-name,.p-meridian .mb .vcard-sub,.p-meridian .mb .vcard-go { color:#2b2622 !important; }
+  .p-meridian .mc { background:#0b0b0d; }
+  .p-meridian .mc .vcard-dots { background-color:#ff5722;
+    -webkit-mask-image:radial-gradient(#000 46%,transparent 48%); mask-image:radial-gradient(#000 46%,transparent 48%);
+    -webkit-mask-size:11px 11px; mask-size:11px 11px; }
+  .p-meridian .mc .vcard-badge { font-family:"Anton",sans-serif; color:#ff5722; text-transform:uppercase; font-size:20px; }
+  .p-meridian .md { background:radial-gradient(120% 120% at 35% 50%, #123024, #080c11); }
+  .p-meridian .md .vcard-dots { background-image:radial-gradient(#7fd0a8 30%,transparent 33%),radial-gradient(#4a89ff 30%,transparent 33%);
+    background-size:9px 9px,9px 9px; background-position:0 0,4px 4px; opacity:.8; }
+  .p-meridian .md .vcard-badge { font-family:"Newsreader",serif; font-style:italic; color:#dff0e7; font-size:20px; }
+
+  /* ── footer ── */
+  footer { border-top:1px solid var(--border); padding:32px clamp(20px,5vw,72px);
+           font-size:12px; color:var(--muted); display:flex; gap:20px; justify-content:space-between; flex-wrap:wrap; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Dither Studies</div>
+  <div class="nav-links">
+    <a href="#aphelion">Aphelion</a>
+    <a href="#nocturne">Nocturne</a>
+    <a href="#meridian">Meridian</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-label">Live canvas · ordered dither · three sources</div>
+  <h1>Three worlds,<br>rendered in <span>dots.</span></h1>
+  <p>One engine, three video sources, twelve visual studies. Every page runs live — the
+  dither field animates from the video and reacts to your cursor. Pick a world, then pick a direction.</p>
+</div>
+
+<!-- ═══════════════════════════════ APHELION ═══════════════════════════════ -->
+<section class="project p-aphelion" id="aphelion">
+  <div class="project-header">
+    <div class="project-meta">
+      <div class="project-num">01 / 03 · Vortex plasma</div>
+      <div class="project-name">Aphelion</div>
+      <p class="project-desc">A collapsing vortex rendered dot by dot — four colour directions from
+      cool-violet tech to ivory print to hot-magenta poster to naturalistic plasma.</p>
+    </div>
+    <a class="project-cta" href="index.html">See all four →</a>
+  </div>
+  <div class="variants">
+    <a class="vcard" href="variant-a.html">
+      <div class="vcard-swatch sa"><div class="vcard-dots"></div></div>
+      <div class="vcard-body">
+        <div class="vcard-name">A · Singularity</div>
+        <div class="vcard-sub">Violet blend · Space Grotesk · twist warp</div>
+        <div class="vcard-go">Open →</div>
+      </div>
+    </a>
+    <a class="vcard" href="variant-b.html">
+      <div class="vcard-swatch sb"><div class="vcard-dots"></div><span class="vcard-badge">Deep Field</span></div>
+      <div class="vcard-body" style="background:#efe9dc">
+        <div class="vcard-name">B · Deep Field</div>
+        <div class="vcard-sub">Ink on ivory · Fraunces · multiply type</div>
+        <div class="vcard-go">Open →</div>
+      </div>
+    </a>
+    <a class="vcard" href="variant-c.html">
+      <div class="vcard-swatch sc"><div class="vcard-dots"></div><span class="vcard-badge">Live</span></div>
+      <div class="vcard-body">
+        <div class="vcard-name">C · Broadcast</div>
+        <div class="vcard-sub">Hot magenta · Anton · hard squares</div>
+        <div class="vcard-go">Open →</div>
+      </div>
+    </a>
+    <a class="vcard" href="variant-d.html">
+      <div class="vcard-swatch sd"><div class="vcard-dots"></div><span class="vcard-badge">Nebula</span></div>
+      <div class="vcard-body">
+        <div class="vcard-name">D · Nebula</div>
+        <div class="vcard-sub">Sampled plasma · Newsreader · fine dots</div>
+        <div class="vcard-go">Open →</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ NOCTURNE ═══════════════════════════════ -->
+<section class="project p-nocturne" id="nocturne">
+  <div class="project-header">
+    <div class="project-meta">
+      <div class="project-num">02 / 03 · Autumn trees</div>
+      <div class="project-name serif">Nocturne</div>
+      <p class="project-desc">Bare autumn trees against a darkening sky — warm amber tones, organic
+      structure, and the kind of dither that makes a subject feel etched rather than rendered.</p>
+    </div>
+    <a class="project-cta" href="tree-index.html">See all four →</a>
+  </div>
+  <div class="variants">
+    <a class="vcard" href="tree-a.html">
+      <div class="vcard-swatch na"><div class="vcard-dots"></div></div>
+      <div class="vcard-body">
+        <div class="vcard-name">A · Dusk</div>
+        <div class="vcard-sub">Amber blend · geometric sans · twist</div>
+        <div class="vcard-go">Open →</div>
+      </div>
+    </a>
+    <a class="vcard" href="tree-b.html">
+      <div class="vcard-swatch nb"><div class="vcard-dots"></div><span class="vcard-badge">Pressed Leaf</span></div>
+      <div class="vcard-body" style="background:#f0e6d3">
+        <div class="vcard-name">B · Pressed Leaf</div>
+        <div class="vcard-sub">Ink on linen · Fraunces · scatter</div>
+        <div class="vcard-go">Open →</div>
+      </div>
+    </a>
+    <a class="vcard" href="tree-c.html">
+      <div class="vcard-swatch nc"><div class="vcard-dots"></div><span class="vcard-badge">On air</span></div>
+      <div class="vcard-body">
+        <div class="vcard-name">C · Broadcast</div>
+        <div class="vcard-sub">Hot orange · Anton · hard squares</div>
+        <div class="vcard-go">Open →</div>
+      </div>
+    </a>
+    <a class="vcard" href="tree-d.html">
+      <div class="vcard-swatch nd"><div class="vcard-dots"></div><span class="vcard-badge">Field Study</span></div>
+      <div class="vcard-body">
+        <div class="vcard-name">D · Field Study</div>
+        <div class="vcard-sub">Sampled autumn · Newsreader · fine dots</div>
+        <div class="vcard-go">Open →</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ MERIDIAN ═══════════════════════════════ -->
+<section class="project p-meridian" id="meridian">
+  <div class="project-header">
+    <div class="project-meta">
+      <div class="project-num">03 / 03 · Rotating earth</div>
+      <div class="project-name poster">Meridian</div>
+      <p class="project-desc">The original study: a rotating earth from orbit, rendered in Bayer
+      ordered dither. The source that started it — four directions from tech-cyan to editorial ivory.</p>
+    </div>
+    <a class="project-cta" href="tree.html">Original →</a>
+  </div>
+  <div class="variants">
+    <a class="vcard" href="variant-a.html">
+      <div class="vcard-swatch ma"><div class="vcard-dots"></div></div>
+      <div class="vcard-body">
+        <div class="vcard-name">A · Orbit</div>
+        <div class="vcard-sub">Cyan blend · Space Grotesk · circles</div>
+        <div class="vcard-go">Open →</div>
+      </div>
+    </a>
+    <a class="vcard" href="variant-b.html">
+      <div class="vcard-swatch mb"><div class="vcard-dots"></div><span class="vcard-badge">Almanac</span></div>
+      <div class="vcard-body" style="background:#f2ead9">
+        <div class="vcard-name">B · Almanac</div>
+        <div class="vcard-sub">Ivory print · Fraunces · multiply</div>
+        <div class="vcard-go">Open →</div>
+      </div>
+    </a>
+    <a class="vcard" href="variant-c.html">
+      <div class="vcard-swatch mc"><div class="vcard-dots"></div><span class="vcard-badge">Live</span></div>
+      <div class="vcard-body">
+        <div class="vcard-name">C · Broadcast</div>
+        <div class="vcard-sub">Hot orange · Anton · squares · lean</div>
+        <div class="vcard-go">Open →</div>
+      </div>
+    </a>
+    <a class="vcard" href="variant-d.html">
+      <div class="vcard-swatch md"><div class="vcard-dots"></div><span class="vcard-badge">Terra</span></div>
+      <div class="vcard-body">
+        <div class="vcard-name">D · Terra</div>
+        <div class="vcard-sub">Sampled earth · Newsreader · fine dots</div>
+        <div class="vcard-go">Open →</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <span>Dither Studies — live canvas experiments</span>
+  <span>One engine · three worlds · twelve directions</span>
+</footer>
+
+</body>
+</html>

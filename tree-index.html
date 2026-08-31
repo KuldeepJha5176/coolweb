@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Nocturne — Autumn Studies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,600;9..144,1,400&family=Inter:wght@400;500&family=Anton&family=Newsreader:ital,wght@1,300&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:#0b0806; color:#f6ecdd; font-family:"Inter",system-ui,sans-serif;
+         -webkit-font-smoothing:antialiased; min-height:100vh; padding:clamp(28px,6vw,80px); }
+  header { max-width:900px; margin:0 auto clamp(30px,5vw,56px); }
+  .kicker { font-family:"Fraunces",serif; font-style:italic; font-size:14px; letter-spacing:.04em;
+            color:#f4a24c; margin-bottom:16px; }
+  h1 { font-family:"Fraunces",serif; font-size:clamp(30px,5vw,52px); line-height:1.05;
+       font-weight:600; letter-spacing:-.02em; }
+  header p { margin-top:16px; color:#c7a98a; max-width:60ch; line-height:1.6; font-size:16px; }
+  .grid { max-width:1100px; margin:0 auto; display:grid; gap:22px;
+          grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); }
+  .card { display:flex; flex-direction:column; border:1px solid rgba(246,236,221,.1); border-radius:16px;
+          overflow:hidden; text-decoration:none; color:inherit; background:#140f0a;
+          transition:transform .2s, border-color .2s, box-shadow .2s; }
+  .card:hover { transform:translateY(-4px); border-color:rgba(246,236,221,.24);
+                box-shadow:0 20px 50px rgba(0,0,0,.55); }
+  .swatch { height:150px; position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; }
+  .dots { position:absolute; inset:0; }
+  .body { padding:20px 22px 24px; }
+  .name { font-size:20px; font-weight:600; margin-bottom:4px; }
+  .tagline { font-size:14px; color:#c7a98a; line-height:1.5; margin-bottom:14px; }
+  .tags { display:flex; flex-wrap:wrap; gap:7px; }
+  .tag { font-size:11px; letter-spacing:.04em; color:#d8c3a8; border:1px solid rgba(246,236,221,.14);
+         padding:4px 9px; border-radius:999px; }
+  .go { margin-top:16px; font-size:13px; font-weight:600; color:#f4a24c; }
+  .foot { max-width:1100px; margin:36px auto 0; font-size:13px; color:#8c7f6b; }
+  .foot a { color:#c7a98a; }
+
+  /* per-style swatch palettes — a hint of each direction's dither */
+  .s-a { background:radial-gradient(120% 120% at 60% 55%, #2a1a0c, #0b0806); }
+  .s-a .dots { background-image:radial-gradient(#f4a24c 32%, transparent 34%),radial-gradient(#6f86b8 32%,transparent 34%);
+               background-size:13px 13px,13px 13px; background-position:0 0,6px 6px; opacity:.85; }
+  .s-a .name { font-family:"Fraunces",serif; }
+  .s-b { background:#efe7d7; }
+  .s-b .dots { background-image:radial-gradient(#3a2a1e 30%, transparent 32%); background-size:16px 16px; opacity:.82; }
+  .s-b .badge { font-family:"Fraunces",serif; color:#3a2a1e; font-size:32px; font-style:italic; position:relative; }
+  .s-c { background:#0a0806; }
+  .s-c .dots { background-image:linear-gradient(#f4a24c 0 0); background-size:11px 11px;
+               -webkit-mask-image:linear-gradient(#000 0 0); mask-image:linear-gradient(#000 0 0);
+               -webkit-mask-size:7px 7px; mask-size:7px 7px; -webkit-mask-repeat:space; mask-repeat:space; }
+  .s-c .badge { font-family:"Anton",sans-serif; color:#f4a24c; font-size:40px; text-transform:uppercase; position:relative; }
+  .s-d { background:radial-gradient(120% 120% at 42% 50%, #1c150d, #090807); }
+  .s-d .dots { background-image:radial-gradient(#e6b877 28%, transparent 31%),radial-gradient(#8faed1 28%,transparent 31%),radial-gradient(#c98a4a 28%,transparent 31%);
+               background-size:8px 8px,8px 8px,8px 8px; background-position:0 0,3px 4px,5px 2px; opacity:.8; }
+  .s-d .badge { font-family:"Newsreader",serif; font-style:italic; color:#f0ebe3; font-size:32px; position:relative; }
+</style>
+</head>
+<body>
+  <header>
+    <div class="kicker">Nocturne — Autumn Studies</div>
+    <h1>Four takes on the turning tree</h1>
+    <p>Same engine, same footage — a piano under an autumn tree, leaves in the wind — worked four ways.
+    Each is a full, interactive page: move your cursor across the field to stir it. Open any to explore.</p>
+  </header>
+
+  <div class="grid">
+    <a class="card" href="tree-a.html">
+      <div class="swatch s-a"><div class="dots"></div></div>
+      <div class="body">
+        <div class="name">A · Dusk</div>
+        <div class="tagline">Warm sampled colour. Amber leaves and sky-blue in the scene's own hues, serif display, dots that lean on the wind.</div>
+        <div class="tags"><span class="tag">Fraunces</span><span class="tag">Sampled colour</span><span class="tag">Circles</span><span class="tag">Lean</span></div>
+        <div class="go">View style →</div>
+      </div>
+    </a>
+
+    <a class="card" href="tree-b.html">
+      <div class="swatch s-b"><div class="dots"></div><span class="badge">Herbarium</span></div>
+      <div class="body">
+        <div class="name">B · Pressed Leaf</div>
+        <div class="tagline">Ivory field journal. Airy ink dots on warm paper, the trunk left as empty space, serif type multiplied in.</div>
+        <div class="tags"><span class="tag">Fraunces + Mono</span><span class="tag">Ink on ivory</span><span class="tag">Airy dots</span><span class="tag">Multiply</span></div>
+        <div class="go">View style →</div>
+      </div>
+    </a>
+
+    <a class="card" href="tree-c.html">
+      <div class="swatch s-c"><div class="dots"></div><span class="badge">On air</span></div>
+      <div class="body">
+        <div class="name">C · Broadcast</div>
+        <div class="tagline">Duotone poster. Heavy condensed caps, hard-edged amber squares on black, a tight twist on hover.</div>
+        <div class="tags"><span class="tag">Anton</span><span class="tag">Hot amber</span><span class="tag">Squares</span><span class="tag">Twist</span></div>
+        <div class="go">View style →</div>
+      </div>
+    </a>
+
+    <a class="card" href="tree-d.html">
+      <div class="swatch s-d"><div class="dots"></div><span class="badge">Field study</span></div>
+      <div class="body">
+        <div class="name">D · Field Study</div>
+        <div class="tagline">Naturalistic. Fine, smooth dots in the tree's real colours, elegant serif, void left / type right.</div>
+        <div class="tags"><span class="tag">Newsreader</span><span class="tag">Sampled colour</span><span class="tag">Fine dots</span><span class="tag">Twist</span></div>
+        <div class="go">View style →</div>
+      </div>
+    </a>
+  </div>
+
+  <p class="foot">The vortex set lives over at <a href="index.html">Aphelion — Style Studies ◂</a></p>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Aphelion — Style Studies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500&family=Fraunces:opsz,wght@9..144,600&family=Anton&family=Newsreader:wght@300;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:#08070e; color:#eceafa; font-family:"Inter",system-ui,sans-serif;
+         -webkit-font-smoothing:antialiased; min-height:100vh; padding:clamp(28px,6vw,80px); }
+  header { max-width:900px; margin:0 auto clamp(30px,5vw,56px); }
+  .kicker { font-family:"Space Grotesk",sans-serif; font-size:13px; letter-spacing:.24em;
+            text-transform:uppercase; color:#8f7bff; margin-bottom:16px; }
+  h1 { font-family:"Space Grotesk",sans-serif; font-size:clamp(30px,5vw,52px); line-height:1.05;
+       font-weight:700; letter-spacing:-.02em; }
+  header p { margin-top:16px; color:#9a92bc; max-width:60ch; line-height:1.6; font-size:16px; }
+  .grid { max-width:1100px; margin:0 auto; display:grid; gap:22px;
+          grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); }
+  .card { display:flex; flex-direction:column; border:1px solid rgba(255,255,255,.09); border-radius:16px;
+          overflow:hidden; text-decoration:none; color:inherit; background:#0d0c16;
+          transition:transform .2s, border-color .2s, box-shadow .2s; }
+  .card:hover { transform:translateY(-4px); border-color:rgba(255,255,255,.22);
+                box-shadow:0 20px 50px rgba(0,0,0,.5); }
+  .swatch { height:150px; position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; }
+  /* a hint of the dot motif per style, using radial-gradient dots */
+  .dots { position:absolute; inset:0; opacity:.9; }
+  .body { padding:20px 22px 24px; }
+  .name { font-size:20px; font-weight:600; margin-bottom:4px; }
+  .tagline { font-size:14px; color:#9a92bc; line-height:1.5; margin-bottom:14px; }
+  .tags { display:flex; flex-wrap:wrap; gap:7px; }
+  .tag { font-size:11px; letter-spacing:.04em; color:#aab6c9; border:1px solid rgba(255,255,255,.12);
+         padding:4px 9px; border-radius:999px; }
+  .go { margin-top:16px; font-size:13px; font-weight:600; color:#8f7bff; }
+
+  /* per-style swatch palettes — a hint of each direction's dither */
+  .s-a { background:radial-gradient(120% 120% at 62% 45%, #1b1440, #08070f); }
+  .s-a .dots { background-image:radial-gradient(#8f7bff 34%, transparent 36%); background-size:13px 13px; opacity:.85; }
+  .s-a .name { font-family:"Space Grotesk",sans-serif; }
+  .s-b { background:#efe9dc; }
+  .s-b .dots { background-image:radial-gradient(#2a2140 30%, transparent 32%); background-size:16px 16px; opacity:.8; }
+  .s-b .badge { font-family:"Fraunces",serif; color:#2a2140; font-size:34px; font-style:italic; position:relative; }
+  .s-c { background:#08070d; }
+  .s-c .dots { background-image:linear-gradient(#ff3ea5 0 0); background-size:11px 11px;
+               -webkit-mask-image:radial-gradient(#000 46%, transparent 48%); mask-image:radial-gradient(#000 46%, transparent 48%);
+               -webkit-mask-size:11px 11px; mask-size:11px 11px; }
+  .s-c .badge { font-family:"Anton",sans-serif; color:#ff3ea5; font-size:40px; text-transform:uppercase; position:relative; }
+  .s-d { background:radial-gradient(120% 120% at 40% 50%, #2a1c52, #080711); }
+  .s-d .dots { background-image:radial-gradient(#b79cff 30%, transparent 33%),radial-gradient(#5a7bff 30%,transparent 33%);
+               background-size:9px 9px,9px 9px; background-position:0 0,4px 4px; opacity:.8; }
+  .s-d .badge { font-family:"Newsreader",serif; font-style:italic; color:#efeaff; font-size:34px; position:relative; }
+</style>
+</head>
+<body>
+  <header>
+    <div class="kicker">Aphelion — Style Studies</div>
+    <h1>Four takes on the dithered vortex</h1>
+    <p>Same engine, same warp-tunnel — four visual directions. Each is a full, interactive page:
+    move your cursor across the vortex to twist the field. Open any to explore, then tell me which to push further.</p>
+  </header>
+
+  <div class="grid">
+    <a class="card" href="variant-a.html">
+      <div class="swatch s-a"><div class="dots"></div></div>
+      <div class="body">
+        <div class="name">A · Singularity</div>
+        <div class="tagline">Cool violet tech. Geometric sans, vortex to the right, dots that twist under the cursor.</div>
+        <div class="tags"><span class="tag">Space Grotesk</span><span class="tag">Violet blend</span><span class="tag">Circles</span><span class="tag">Twist</span></div>
+        <div class="go">View style →</div>
+      </div>
+    </a>
+
+    <a class="card" href="variant-b.html">
+      <div class="swatch s-b"><div class="dots"></div><span class="badge">Deep Field</span></div>
+      <div class="body">
+        <div class="name">B · Deep Field</div>
+        <div class="tagline">Ivory editorial print. Serif display over airy violet-ink dots, type multiplied into the field.</div>
+        <div class="tags"><span class="tag">Fraunces + Mono</span><span class="tag">Ink on ivory</span><span class="tag">Airy dots</span><span class="tag">Multiply</span></div>
+        <div class="go">View style →</div>
+      </div>
+    </a>
+
+    <a class="card" href="variant-c.html">
+      <div class="swatch s-c"><div class="dots"></div><span class="badge">Live</span></div>
+      <div class="body">
+        <div class="name">C · Broadcast</div>
+        <div class="tagline">Duotone poster. Heavy condensed caps, hard-edged magenta squares, a tight twist on hover.</div>
+        <div class="tags"><span class="tag">Anton</span><span class="tag">Hot magenta</span><span class="tag">Squares</span><span class="tag">Twist</span></div>
+        <div class="go">View style →</div>
+      </div>
+    </a>
+
+    <a class="card" href="variant-d.html">
+      <div class="swatch s-d"><div class="dots"></div><span class="badge">Nebula</span></div>
+      <div class="body">
+        <div class="name">D · Nebula</div>
+        <div class="tagline">Naturalistic. Fine, smooth dots in the plasma's own colours, elegant serif, vortex left / type right.</div>
+        <div class="tags"><span class="tag">Newsreader</span><span class="tag">Sampled colour</span><span class="tag">Fine dots</span><span class="tag">Twist</span></div>
+        <div class="go">View style →</div>
+      </div>
+    </a>
+  </div>
+</body>
+</html>
