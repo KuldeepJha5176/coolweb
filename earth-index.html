@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Meridian — Style Studies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500&family=Fraunces:opsz,wght@9..144,600&family=Anton&family=Newsreader:wght@300;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:#050810; color:#eaf2ff; font-family:"Inter",system-ui,sans-serif;
+         -webkit-font-smoothing:antialiased; min-height:100vh; padding:clamp(28px,6vw,80px); }
+  header { max-width:900px; margin:0 auto clamp(30px,5vw,56px); }
+  .kicker { font-family:"Space Grotesk",sans-serif; font-size:13px; letter-spacing:.24em;
+            text-transform:uppercase; color:#68c2ff; margin-bottom:16px; }
+  h1 { font-family:"Space Grotesk",sans-serif; font-size:clamp(30px,5vw,52px); line-height:1.05;
+       font-weight:700; letter-spacing:-.02em; }
+  header p { margin-top:16px; color:#8fa6c8; max-width:60ch; line-height:1.6; font-size:16px; }
+  .grid { max-width:1100px; margin:0 auto; display:grid; gap:22px;
+          grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); }
+  .card { display:flex; flex-direction:column; border:1px solid rgba(255,255,255,.09); border-radius:16px;
+          overflow:hidden; text-decoration:none; color:inherit; background:#0c0f16;
+          transition:transform .2s,border-color .2s,box-shadow .2s; }
+  .card:hover { transform:translateY(-4px); border-color:rgba(255,255,255,.22); box-shadow:0 20px 50px rgba(0,0,0,.5); }
+  .swatch { height:150px; position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; }
+  .dots { position:absolute; inset:0; opacity:.9; }
+  .body { padding:20px 22px 24px; }
+  .name { font-size:20px; font-weight:600; margin-bottom:4px; }
+  .tagline { font-size:14px; color:#8fa6c8; line-height:1.5; margin-bottom:14px; }
+  .tags { display:flex; flex-wrap:wrap; gap:7px; }
+  .tag { font-size:11px; letter-spacing:.04em; color:#aab6c9; border:1px solid rgba(255,255,255,.12);
+         padding:4px 9px; border-radius:999px; }
+  .go { margin-top:16px; font-size:13px; font-weight:600; color:#68c2ff; }
+  .s-a { background:radial-gradient(120% 120% at 70% 40%, #0f2033, #050810); }
+  .s-a .dots { background-image:radial-gradient(#68c2ff 34%,transparent 36%); background-size:13px 13px; }
+  .s-b { background:#f2ead9; }
+  .s-b .dots { background-image:radial-gradient(#2b2622 30%,transparent 32%); background-size:15px 15px; opacity:.85; }
+  .s-b .badge { font-family:"Fraunces",serif; color:#2b2622; font-size:34px; font-style:italic; position:relative; }
+  .s-b .name,.s-b .tagline,.s-b .go { color:#2b2622 !important; }
+  .s-c { background:#0b0b0d; }
+  .s-c .dots { background-color:#ff5722;
+    -webkit-mask-image:radial-gradient(#000 46%,transparent 48%); mask-image:radial-gradient(#000 46%,transparent 48%);
+    -webkit-mask-size:11px 11px; mask-size:11px 11px; }
+  .s-c .badge { font-family:"Anton",sans-serif; color:#ff5722; font-size:40px; text-transform:uppercase; position:relative; }
+  .s-d { background:radial-gradient(120% 120% at 35% 50%, #123024, #080c11); }
+  .s-d .dots { background-image:radial-gradient(#7fd0a8 30%,transparent 33%),radial-gradient(#4a89ff 30%,transparent 33%);
+    background-size:9px 9px,9px 9px; background-position:0 0,4px 4px; opacity:.8; }
+  .s-d .badge { font-family:"Newsreader",serif; font-style:italic; color:#dff0e7; font-size:34px; position:relative; }
+  .back { display:inline-block; margin-top:40px; font-size:13px; letter-spacing:.14em;
+          text-transform:uppercase; color:#8fa6c8; text-decoration:none; }
+  .back:hover { color:#eaf2ff; }
+</style>
+</head>
+<body>
+  <header>
+    <div class="kicker">Meridian — Style Studies</div>
+    <h1>Four takes on the rotating earth</h1>
+    <p>Same engine, same earth — four visual directions. Move your cursor across the globe to feel the warp.</p>
+  </header>
+  <div class="grid">
+    <a class="card" href="earth-a.html">
+      <div class="swatch s-a"><div class="dots"></div></div>
+      <div class="body">
+        <div class="name">A · Orbit</div>
+        <div class="tagline">Cool cyan tech. Geometric sans, globe right, dots twist under the cursor.</div>
+        <div class="tags"><span class="tag">Space Grotesk</span><span class="tag">Cyan blend</span><span class="tag">Circles</span><span class="tag">Twist</span></div>
+        <div class="go">View style →</div>
+      </div>
+    </a>
+    <a class="card" href="earth-b.html">
+      <div class="swatch s-b"><div class="dots"></div><span class="badge">Almanac</span></div>
+      <div class="body" style="background:#f2ead9">
+        <div class="name">B · Almanac</div>
+        <div class="tagline">Ivory editorial. Serif display, type multiplied into the dot field, gentle scatter.</div>
+        <div class="tags"><span class="tag">Fraunces</span><span class="tag">Ink on ivory</span><span class="tag">Airy dots</span><span class="tag">Scatter</span></div>
+        <div class="go">View style →</div>
+      </div>
+    </a>
+    <a class="card" href="earth-c.html">
+      <div class="swatch s-c"><div class="dots"></div><span class="badge">Live</span></div>
+      <div class="body">
+        <div class="name">C · Broadcast</div>
+        <div class="tagline">Duotone poster. Heavy condensed caps, orange squares, directional lean on hover.</div>
+        <div class="tags"><span class="tag">Anton</span><span class="tag">Hot orange</span><span class="tag">Squares</span><span class="tag">Lean</span></div>
+        <div class="go">View style →</div>
+      </div>
+    </a>
+    <a class="card" href="earth-d.html">
+      <div class="swatch s-d"><div class="dots"></div><span class="badge">Terra</span></div>
+      <div class="body">
+        <div class="name">D · Terra</div>
+        <div class="tagline">Naturalistic. Fine dots in the earth's own colours, elegant serif, globe left / type right.</div>
+        <div class="tags"><span class="tag">Newsreader</span><span class="tag">Sampled colour</span><span class="tag">Fine dots</span><span class="tag">Twist</span></div>
+        <div class="go">View style →</div>
+      </div>
+    </a>
+  </div>
+  <a class="back" href="/">◂ All worlds</a>
+</body>
+</html>
